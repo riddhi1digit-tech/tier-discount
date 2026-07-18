@@ -1,0 +1,29 @@
+query CartInput($selectedCollectionIds: [ID!]!) {
+  cart {
+    lines {
+      id
+      quantity
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          id
+          product {
+            id
+            isGiftCard
+            inAnyCollection(ids: $selectedCollectionIds)
+          }
+        }
+      }
+    }
+  }
+
+  discount {
+    discountClasses
+    metafield(
+      namespace: "tier_discount"
+      key: "configuration"
+    ) {
+      jsonValue
+    }
+  }
+}
