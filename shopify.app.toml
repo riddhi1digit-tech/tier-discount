@@ -1,13 +1,20 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "5488043562a06c0e30594688ce694505"
-application_url = "https://example.com"
+application_url = "https://discount-teal.vercel.app"
 embedded = true
 name = "Tier-Discount"
 
-[access_scopes]
-# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products,write_metaobjects,write_metaobject_definitions,write_discounts,read_discounts"
+[webhooks]
+api_version = "2026-10"
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/uninstalled"
+  topics = [ "app/uninstalled" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/scopes_update"
+  topics = [ "app/scopes_update" ]
 
 [product.metafields.app.demo_info]
 type = "single_line_text_field"
@@ -33,19 +40,14 @@ required = true
 name = "Description"
 type = "multi_line_text_field"
 
-[webhooks]
-api_version = "2026-10"
-
-  [[webhooks.subscriptions]]
-  uri = "/webhooks/app/uninstalled"
-  topics = [ "app/uninstalled" ]
-
-  [[webhooks.subscriptions]]
-  uri = "/webhooks/app/scopes_update"
-  topics = [ "app/scopes_update" ]
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_metaobject_definitions,write_metaobjects,write_products"
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [
+  "https://discount-teal.vercel.app/api/auth"
+]
 
 [build]
 automatically_update_urls_on_dev = true

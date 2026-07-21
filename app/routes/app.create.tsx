@@ -133,7 +133,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const { admin } = await authenticate.admin(request);
 
   const formData = await request.json();
-
   console.log("========== FORM DATA ==========");
   console.log(formData);
 console.log("========== FORM DATA ==========");
